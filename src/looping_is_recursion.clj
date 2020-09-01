@@ -15,12 +15,14 @@
     (helper (first a-seq) (rest a-seq))))
 
 (defn seq= [seq1 seq2]
-  (let [helper (fn [acc x y]
-                  (cond
-                    (and (empty? x) (empty? y)) acc
-                    (= (first x) (first y)) (recur acc (rest x) (rest y))
-                    :else false))]
-    (helper true seq1 seq2)))
+  (if (not= (count seq1) (count seq2))
+    false
+    (let [helper (fn [x y]
+                    (cond
+                      (and (empty? x) (empty? y)) true
+                      (= (first x) (first y)) (recur (rest x) (rest y))
+                      :else false))]
+      (helper seq1 seq2))))
 
 (defn find-first-index [pred a-seq]
   (loop [p? pred
