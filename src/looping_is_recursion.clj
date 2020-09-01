@@ -20,7 +20,7 @@
                     (and (empty? x) (empty? y)) acc
                     (= (first x) (first y)) (recur acc (rest x) (rest y))
                     :else false))]
-    (helper true (into [] seq1) (into [] seq2))))
+    (helper true seq1 seq2)))
 
 (defn find-first-index [pred a-seq]
   (loop [p? pred
